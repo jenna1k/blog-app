@@ -1,11 +1,10 @@
 import React from "react";
-import Navbar from "./layout/Navbar";
+import AppRouter from "./Router";
 
 function App() {
   return (
     <div className="App">
-      <Navbar />
-      Blog
+      <AppRouter />
     </div>
   );
 }

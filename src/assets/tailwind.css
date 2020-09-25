@@ -1,5 +1,26 @@
 @import "tailwindcss/base";
-
 @import "tailwindcss/components";
-
 @import "tailwindcss/utilities";
+
+
+.btn {
+  @apply font-bold py-2 px-4 rounded;
+}
+.btn-blue {
+  @apply bg-blue-500 text-white;
+}
+.btn-blue:hover {
+  @apply bg-blue-700;
+}
+
+.label {
+  @apply block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2
+}
+
+.input {
+  @apply appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-500 rounded py-3 px-4 mb-3 leading-tight
+}
+
+.input:focus {
+  @apply outline-none bg-white border-gray-500
+}
