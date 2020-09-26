@@ -1,6 +1,22 @@
 import React, { Component } from "react";
+import { createPost } from "../../store/actions/postActions";
+import { connect } from "react-redux";
 
 export class CreatePost extends Component {
+  state = {
+    title: "",
+    content: "",
+  };
+
+  handleChange = (event) => {
+    this.setState({
+      [event.target.id]: event.target.value,
+    });
+  };
+  handleSubmit = (event) => {
+    event.preventDefault();
+    this.props.createPost(this.state);
+  };
   render() {
     return (
       <div className="bg-white max-w-4xl mx-auto my-2 shadow overflow-hidden sm:rounded-lg">
@@ -9,17 +25,34 @@ export class CreatePost extends Component {
             Create a Post
           </h3>
         </div>
-        <div className="w-full mx-auto px-10 my-5">
-          <input type="text" className="w-full input" placeholder="Title" />
+        <form
+          onSubmit={this.handleSubmit}
+          className="w-full mx-auto px-10 my-5"
+        >
+          <input
+            type="text"
+            id="title"
+            onChange={this.handleChange}
+            className="w-full input"
+            placeholder="Title"
+          />
           <textarea
+            id="content"
+            onChange={this.handleChange}
             className="w-full input"
             placeholder="Write your post here..."
           ></textarea>
-          <button className="btn btn-blue">Submit</button>
-        </div>
+          <input type="submit" value="Submit" className="btn btn-blue" />
+        </form>
       </div>
     );
   }
 }
 
-export default CreatePost;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    createPost: (post) => dispatch(createPost(post)),
+  };
+};
+
+export default connect(null, mapDispatchToProps)(CreatePost);
