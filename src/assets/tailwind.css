@@ -13,6 +13,14 @@
   @apply bg-blue-700;
 }
 
+.outline-btn {
+  @apply inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white
+}
+
+.outline-btn:hover {
+  @apply border-transparent text-teal-500 bg-white
+}
+
 .label {
   @apply block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2
 }

@@ -1,8 +1,16 @@
 import React, { Component } from "react";
+import PostCard from "./PostCard";
 
 export class PostList extends Component {
   render() {
-    return <div>postlist</div>;
+    return (
+      <div>
+        <PostCard />
+        <PostCard />
+        <PostCard />
+        <PostCard />
+      </div>
+    );
   }
 }
 

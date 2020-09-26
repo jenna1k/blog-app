@@ -3,7 +3,7 @@ import React, { Component } from "react";
 export class SignUp extends Component {
   render() {
     return (
-      <form class="w-full max-w-lg">
+      <form class="w-full max-w-lg mx-auto my-5">
         <div class="flex flex-wrap -mx-3 mb-6">
           <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
             <label class="label" for="grid-first-name">
@@ -57,6 +57,9 @@ export class SignUp extends Component {
               Make it as long and as crazy as you'd like
             </p>
           </div>
+          <button className="btn btn-blue mx-auto my-5" type="button">
+            Create an account
+          </button>
         </div>
       </form>
     );

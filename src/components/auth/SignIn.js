@@ -1,9 +1,10 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 
 export class SignIn extends Component {
   render() {
     return (
-      <div className="w-full max-w-xs">
+      <div className="w-full max-w-xs mx-auto my-5">
         <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
           <div className="mb-4">
             <label className="label" for="username">
@@ -31,18 +32,15 @@ export class SignIn extends Component {
             </p>
           </div>
           <div className="flex items-center justify-between">
-            <button
-              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-              type="button"
-            >
+            <button className="btn btn-blue" type="button">
               Sign In
             </button>
-            <a
-              class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800"
-              href="#"
+            <Link
+              to="signup"
+              className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800"
             >
-              Forgot Password?
-            </a>
+              Don't have an account?
+            </Link>
           </div>
         </form>
         <p class="text-center text-gray-500 text-xs">
