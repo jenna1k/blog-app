@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { createPost } from "../../store/actions/postActions";
 import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 
 export class CreatePost extends Component {
   state = {
@@ -16,7 +17,7 @@ export class CreatePost extends Component {
   handleSubmit = (event) => {
     event.preventDefault();
     this.props.createPost(this.state);
-    // this.props.history.push("/");
+    this.props.history.push("/");
   };
   render() {
     return (
@@ -56,4 +57,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(null, mapDispatchToProps)(CreatePost);
+export default withRouter(connect(null, mapDispatchToProps)(CreatePost));

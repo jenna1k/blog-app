@@ -19,7 +19,7 @@ function AppRouter() {
         <Route exact path="/post">
           <CreatePost />
         </Route>
-        <Route exact path="/post:id">
+        <Route path="/post/:id">
           <PostDetails />
         </Route>
         <Route path="/signup">

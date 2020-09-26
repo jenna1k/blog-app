@@ -1,6 +1,4 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import PostList from "./posts/PostList";
 import PostCard from "./posts/PostCard";
 import { connect } from "react-redux";
 import { firestoreConnect } from "react-redux-firebase";

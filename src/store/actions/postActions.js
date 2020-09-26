@@ -1,3 +1,5 @@
+import { dbService } from "../../fbase";
+
 export const createPost = (post) => {
   return (dispatch, getState, { getFirestore, getFirebase }) => {
     const firestore = getFirestore();
@@ -6,10 +8,8 @@ export const createPost = (post) => {
       .add({
         ...post,
         // authorId,
-        // title,
-        // content,
         // attachmentUrl,
-        createdAt: new Date(),
+        createdAt: Date.now(),
       })
       .then(() => {
         dispatch({ type: "CREATE_POST", post });
