@@ -1,9 +1,11 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import PostList from "./posts/PostList";
+import { connect } from "react-redux";
 
 export class Home extends Component {
   render() {
+    const { posts } = this.props;
     return (
       <div>
         <header
@@ -25,4 +27,10 @@ export class Home extends Component {
   }
 }
 
-export default Home;
+const mapStateToProps = (state) => {
+  return {
+    posts: state.post.posts,
+  };
+};
+
+export default connect(mapStateToProps)(Home);
