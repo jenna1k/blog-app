@@ -1,7 +1,10 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import PostList from "./posts/PostList";
+import PostCard from "./posts/PostCard";
 import { connect } from "react-redux";
+import { firestoreConnect } from "react-redux-firebase";
+import { compose } from "redux";
 
 export class Home extends Component {
   render() {
@@ -19,7 +22,8 @@ export class Home extends Component {
         ></header>
         <main>
           <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
-            <PostList />
+            {posts &&
+              posts.map((post) => <PostCard key={post.id} post={post} />)}
           </div>
         </main>
       </div>
@@ -28,9 +32,17 @@ export class Home extends Component {
 }
 
 const mapStateToProps = (state) => {
+  console.log(state);
   return {
-    posts: state.post.posts,
+    posts: state.firestore.ordered.posts,
   };
 };
 
-export default connect(mapStateToProps)(Home);
+export default compose(
+  connect(mapStateToProps),
+  firestoreConnect([
+    {
+      collection: "posts",
+    },
+  ])
+)(Home);
