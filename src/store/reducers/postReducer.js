@@ -6,8 +6,9 @@ const postReducer = (state = initState, action) => {
       console.log("create project success ", action.post);
     case "CREATE_POST_ERROR":
       console.log("failed to create a post");
+    default:
+      return state;
   }
-  return state;
 };
 
 export default postReducer;

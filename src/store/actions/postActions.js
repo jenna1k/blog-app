@@ -1,5 +1,3 @@
-import { dbService } from "../../fbase";
-
 export const createPost = (post) => {
   return (dispatch, getState, { getFirestore, getFirebase }) => {
     const firestore = getFirestore();

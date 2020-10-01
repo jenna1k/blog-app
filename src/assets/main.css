@@ -18852,6 +18852,34 @@ video {
   background-color: rgba(255, 255, 255, var(--bg-opacity))
 }
 
+.social-link {
+  --bg-opacity: 1;
+  background-color: #fff;
+  background-color: rgba(255, 255, 255, var(--bg-opacity));
+  --text-opacity: 1;
+  color: #2d3748;
+  color: rgba(45, 55, 72, var(--text-opacity));
+  font-weight: 400;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  border-radius: 0.25rem;
+  outline: 0;
+  margin-right: 0.25rem;
+  margin-bottom: 0.25rem;
+  text-transform: uppercase;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  display: inline-flex;
+  align-items: center;
+  font-weight: 700;
+  font-size: 0.75rem
+}
+
+.social-link:hover {
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)
+}
+
 .label {
   display: block;
   text-transform: uppercase;

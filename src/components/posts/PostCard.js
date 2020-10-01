@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const PostCard = ({ post }) => {
   return (
-    <div className="max-w-sm rounded overflow-hidden shadow-lg">
+    <div className="max-w-sm rounded mb-2 overflow-hidden shadow-lg">
       <Link to={`/post/${post.id}`}>
         <img
           className="w-full"

@@ -10,7 +10,7 @@ export class Home extends Component {
     return (
       <div>
         <header
-          className="bg-cover bg-center h-64"
+          className="bg-cover bg-center h-64 lg:h-screen"
           style={{
             backgroundImage:
               "url(" +
@@ -30,7 +30,6 @@ export class Home extends Component {
 }
 
 const mapStateToProps = (state) => {
-  console.log(state);
   return {
     posts: state.firestore.ordered.posts,
   };

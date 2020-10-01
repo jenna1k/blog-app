@@ -21,6 +21,14 @@
   @apply border-transparent text-teal-500 bg-white
 }
 
+.social-link {
+  @apply bg-white text-gray-800 font-normal px-4 py-2 rounded outline-none mr-1 mb-1 uppercase shadow inline-flex items-center font-bold text-xs
+}
+
+.social-link:hover {
+  @apply shadow-md
+}
+
 .label {
   @apply block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2
 }
