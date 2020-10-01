@@ -9,7 +9,6 @@ export const createPost = (post) => {
       .collection("posts")
       .add({
         ...post,
-        postId: uuidv4(),
         authorId: authorId,
         authorFirstName: profile.firstName,
         authorLastName: profile.lastName,

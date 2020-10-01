@@ -3,28 +3,54 @@ import PostCard from "./posts/PostCard";
 import { connect } from "react-redux";
 import { firestoreConnect } from "react-redux-firebase";
 import { compose } from "redux";
+import background from "../assets/circuit-board.svg";
+import { Link } from "react-router-dom";
 
 export class Home extends Component {
   render() {
     const { posts } = this.props;
     return (
-      <div>
+      <>
         <header
-          className="bg-cover bg-center h-64 lg:h-screen"
+          className="text-center text-white mx-auto bg-purple-700"
           style={{
-            backgroundImage:
-              "url(" +
-              "https://images.unsplash.com/photo-1555099962-4199c345e5dd?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80" +
-              ")",
+            backgroundImage: `url(${background})`,
           }}
-        ></header>
-        <main>
-          <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
-            {posts &&
-              posts.map((post) => <PostCard key={post.id} post={post} />)}
-          </div>
+        >
+          <p className="font-black text-6xl tracking-tight pt-6">Dev Blog</p>
+          <p className="font-semibold text-lg tracking-wide">
+            Fresh articles about technology
+          </p>
+          <p className="font-thin text-base tracking-widest pb-6">
+            Get the latest information, insights, announcements, and news
+          </p>
+        </header>
+        <main className="flex-grow flex justify-center items-center">
+          {posts && posts.length ? (
+            <div className="mx-auto px-4 sm:px-8 py-2 text-center">
+              <div className="grid md:grid-cols-2 sm:grid-cols-1 lg:grid-cols-3 m-5 mb-10">
+                {posts &&
+                  posts.map((post) => <PostCard key={post.id} post={post} />)}
+              </div>
+            </div>
+          ) : (
+            <div className="m-20 text-center">
+              <p>
+                <Link to="/signin">
+                  <b>Sign In</b>
+                </Link>{" "}
+                and Create New Article!
+              </p>
+              <p>
+                Don't have an account yet?{" "}
+                <Link to="/signup">
+                  <b>Sign Up here</b>
+                </Link>
+              </p>
+            </div>
+          )}
         </main>
-      </div>
+      </>
     );
   }
 }

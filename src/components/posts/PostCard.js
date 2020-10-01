@@ -3,16 +3,19 @@ import { Link } from "react-router-dom";
 
 const PostCard = ({ post }) => {
   return (
-    <div className="max-w-sm rounded mb-2 overflow-hidden shadow-lg">
+    <div className="bg-white overflow-hidden hover:bg-green-100 border border-gray-200 m-2 text-left shadow">
       <Link to={`/post/${post.id}`}>
-        <div className="px-6 py-4 bg-green-500">
-          <div className="font-bold text-xl mb-2">{post.title}</div>
-        </div>
-        <div className="px-6 pt-4 pb-2">
-          <p className="text-gray-700 text-base">{post.content}</p>
-          <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
-            {post.authorFirstName} {post.authorLastName}
-          </span>
+        <div className="px-6 py-4">
+          <p className="font-semibold text-base capitalize mb-2 truncate">
+            {post.title}
+          </p>
+          <p className="font-thin text-base mb-2 capitalize truncate">
+            by {post.authorFirstName} {post.authorLastName},{" "}
+            {new Date(post.createdAt).toDateString()}
+          </p>
+          <p className="text-gray-700 text-base truncate pt-4">
+            {post.content}
+          </p>
         </div>
       </Link>
     </div>

@@ -23,10 +23,10 @@ export class SignUp extends Component {
     if (auth.uid) return <Redirect to="/" />;
     return (
       <form
-        className="w-full max-w-lg mx-auto my-5"
+        className="w-full max-w-lg bg-white shadow-md rounded mx-auto my-5"
         onSubmit={authError ? null : this.handleSubmit}
       >
-        <div className="flex flex-wrap -mx-3 mb-6">
+        <div className="flex flex-wrap mx-3 py-6">
           <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
             <label className="label" htmlFor="firstName">
               First Name
@@ -52,7 +52,7 @@ export class SignUp extends Component {
             />
           </div>
         </div>
-        <div className="flex flex-wrap -mx-3 mb-6">
+        <div className="flex flex-wrap mx-3 mb-6">
           <div className="w-full px-3">
             <label className="label" htmlFor="email">
               Email

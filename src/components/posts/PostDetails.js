@@ -6,7 +6,7 @@ import { compose } from "redux";
 import { deletePost } from "../../store/actions/postActions";
 import { dbService } from "../../fbase";
 
-const PostDetails = ({ post, auth, deletePost, id, history }) => {
+const PostDetails = ({ post, auth, deletePost, id, history, user }) => {
   const [comment, setComment] = useState("");
   const [comments, setComments] = useState([]);
 
@@ -29,6 +29,7 @@ const PostDetails = ({ post, auth, deletePost, id, history }) => {
       postId: id,
       comment,
       creatorId: auth.uid,
+      creatorName: `${user.firstName} ${user.lastName}`,
       createdAt: Date.now(),
     };
     await dbService.collection("comments").add(commentObj);
@@ -54,47 +55,63 @@ const PostDetails = ({ post, auth, deletePost, id, history }) => {
 
   if (post) {
     return (
-      <section className="w-full mx-auto md:w-2/3 flex flex-col items-center px-3">
-        <article className="flex flex-col shadow my-4">
-          <div className="bg-white flex flex-col justify-start p-6">
-            <p className="text-3xl font-bold pb-4">{post.title}</p>
-            <p className="text-sm pb-8">
-              By{" "}
-              <span className="font-semibold">
-                {post.authorFirstName} {post.authorLastName}
-              </span>
-              , Published on {new Date(post.createdAt).toDateString()}
-            </p>
-            {post.authorId === auth.uid ? (
-              <div className="flex items-center">
-                <Link to={`/editPost/${id}`}>
-                  <button className="btn bg-gray-200">Edit</button>
-                </Link>
-                <button className="btn bg-red-400" onClick={handleDeleteClick}>
-                  Delete
-                </button>
-              </div>
-            ) : null}
-            <p className="pb-3">{post.content}</p>
-          </div>
+      <main className="h-full text-center p-10 lg:px-20">
+        <article className="bg-gray-100 py-5 sm:px-1 md:px-4 lg:px-10 max-w-5xl mx-auto">
+          {post.authorId === auth.uid ? (
+            <div className="text-right">
+              <Link to={`/editPost/${id}`}>
+                <button className="outline-btn mx-3">Edit</button>
+              </Link>
+              <button className="outline-btn mx-3" onClick={handleDeleteClick}>
+                Delete
+              </button>
+            </div>
+          ) : null}
+          <p className="text-3xl font-medium capitalize py-5 break-words">
+            {post.title}
+          </p>
+          <p className="text-sm font-normal tracking-wide capitalize">
+            By {post.authorFirstName} {post.authorLastName}, Published on{" "}
+            {new Date(post.createdAt).toDateString()}
+          </p>
+
+          <p className="py-10 sm:px-5 md:px-10 lg:px-20 text-left text-2xl break-words">
+            {post.content}
+          </p>
         </article>
-        <div>
-          {comments.map((comment) => (
-            <div key={comment.id}>{comment.comment}</div>
-          ))}
-        </div>
-        {auth.uid ? (
-          <form onSubmit={handleCommentSubmit}>
-            <input
-              type="text"
-              placeholder="comment"
-              value={comment}
-              onChange={handleCommentChange}
-            />
-            <input type="submit" value="submit" />
-          </form>
-        ) : null}
-      </section>
+        <section className="bg-gray-100 mt-8 py-5 sm:px-1 md:px-4 lg:px-10 max-w-5xl mx-auto">
+          <div className="pt-5 px-10">
+            {comments.map((comment) => (
+              <div className="mb-2 text-left" key={comment.id}>
+                <span className="font-thin tracking-tighter">
+                  {new Date(comment.createdAt).toLocaleString()}{" "}
+                </span>
+                <span className="capitalize">{comment.creatorName} </span>
+                <span className="text-gray-700"> {comment.comment}</span>
+              </div>
+            ))}
+          </div>
+          {auth.uid ? (
+            <form
+              onSubmit={handleCommentSubmit}
+              className="flex tems-center justify-center px-10 my-5"
+            >
+              <input
+                type="text"
+                placeholder="comment"
+                value={comment}
+                onChange={handleCommentChange}
+                className="w-3/5 input"
+              />
+              <input
+                type="submit"
+                value="submit"
+                className="btn btn-blue h-12 ml-3"
+              />
+            </form>
+          ) : null}
+        </section>
+      </main>
     );
   } else {
     return <div>Loding...</div>;
@@ -104,10 +121,12 @@ const mapStateToProps = (state, ownProps) => {
   const id = ownProps.match.params.id;
   const posts = state.firestore.data.posts;
   const post = posts ? posts[id] : null;
+  const user = state.firebase.profile;
   return {
     post,
     id,
     auth: state.firebase.auth,
+    user,
   };
 };
 

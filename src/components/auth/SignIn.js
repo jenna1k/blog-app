@@ -20,58 +20,11 @@ export class SignIn extends Component {
     this.props.signIn(this.state);
   };
 
-  onSocialClick = async (event) => {
-    const {
-      target: { name },
-    } = event;
-    let provider;
-    if (name === "google") {
-      provider = new fbInstance.auth.GoogleAuthProvider();
-    } else if (name === "github") {
-      provider = new fbInstance.auth.GithubAuthProvider();
-    }
-    await authService.signInWithPopup(provider);
-  };
   render() {
     const { auth, authError } = this.props;
     if (auth.uid) return <Redirect to="/" />;
     return (
       <div className="w-full max-w-xs mx-auto bg-white shadow-md rounded p-8 my-5">
-        <h6 className="text-gray-600 text-sm font-bold text-center mb-3">
-          Sign in with
-        </h6>
-        <div className="btn-wrapper text-center">
-          <button
-            className="social-link"
-            type="button"
-            onClick={this.onSocialClick}
-            name="google"
-          >
-            <img
-              alt="Signin with Google"
-              className="w-5 mr-1"
-              src="https://developers.google.com/identity/images/g-logo.png"
-            />
-            Google
-          </button>
-          <button
-            className="social-link"
-            type="button"
-            onClick={this.onSocialClick}
-            name="github"
-          >
-            <img
-              alt="Signin with Github"
-              className="w-5 mr-1"
-              src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"
-            />
-            Github
-          </button>
-          <hr className="mt-6 border-b-1 border-gray-400"></hr>
-          <div className="text-gray-500 text-center mb-3 font-bold">
-            <small>Sign in with credentials</small>
-          </div>
-        </div>
         <form onSubmit={this.handleSubmit}>
           <div className="mb-4">
             <label className="label" htmlFor="email">

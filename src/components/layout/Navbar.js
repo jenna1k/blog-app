@@ -10,9 +10,9 @@ export class Navbar extends Component {
   render() {
     const { auth, profile } = this.props;
     return (
-      <nav className="flex items-center justify-between flex-wrap bg-green-700 p-2">
+      <nav className="flex items-center justify-between flex-wrap p-2 text-purple-800">
         <Link to="/">
-          <div className="flex items-center flex-shrink-0 text-white mr-6">
+          <div className="flex items-center flex-shrink-0 mr-6">
             <svg
               className="fill-current h-8 w-8 mr-2"
               width="54"
@@ -30,17 +30,20 @@ export class Navbar extends Component {
         {auth.uid ? (
           <div className="flex items-center">
             <Link to="/post">
-              <button className="outline-btn mr-2">Post</button>
+              <button className="outline-btn shadow mr-2">Post</button>
             </Link>
-            <div className="inline-block mx-1 pt-1 h-8 w-8 lg:mx-4 bg-green-300 rounded-full text-white text-center text-lg font-mono font-bold uppercase shadow-solid">
+            <div className="inline-block mx-1 pt-1 h-8 w-8 lg:mx-4 bg-green-300 rounded-full text-center text-lg font-mono font-bold uppercase shadow-solid">
               {profile.initials}
             </div>
-            <button className="outline-btn mr-2" onClick={this.handleClick}>
+            <button
+              className="outline-btn shadow mr-2"
+              onClick={this.handleClick}
+            >
               Sign Out
             </button>
           </div>
         ) : (
-          <div className="outline-btn mt-4 lg:mt-0">
+          <div className="outline-btn mr-2">
             <Link to="/signin">Sign In</Link>
           </div>
         )}
