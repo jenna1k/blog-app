@@ -15,7 +15,8 @@
     "react-scripts": "3.4.3",
     "redux": "^4.0.5",
     "redux-firestore": "^0.13.0",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
+    "uuidv4": "^6.2.3"
   },
   "scripts": {
     "start": "npm run watch:css && react-scripts start",
