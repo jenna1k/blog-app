@@ -8,7 +8,7 @@ export class Navbar extends Component {
     this.props.signOut();
   };
   render() {
-    const { auth } = this.props;
+    const { auth, profile } = this.props;
     return (
       <nav className="flex items-center justify-between flex-wrap bg-green-700 p-2">
         <Link to="/">
@@ -28,15 +28,13 @@ export class Navbar extends Component {
           </div>
         </Link>
         {auth.uid ? (
-          <div>
+          <div className="flex items-center">
             <Link to="/post">
               <button className="outline-btn mr-2">Post</button>
             </Link>
-            <img
-              className="inline-block mx-1 h-8 w-8 lg:mr-4 rounded-full text-white shadow-solid"
-              src="https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-              alt=""
-            />
+            <div className="inline-block mx-1 pt-1 h-8 w-8 lg:mx-4 bg-green-300 rounded-full text-white text-center text-lg font-mono font-bold uppercase shadow-solid">
+              {profile.initials}
+            </div>
             <button className="outline-btn mr-2" onClick={this.handleClick}>
               Sign Out
             </button>
@@ -54,6 +52,7 @@ export class Navbar extends Component {
 const mapStateToProps = (state) => {
   return {
     auth: state.firebase.auth,
+    profile: state.firebase.profile,
   };
 };
 

@@ -12,16 +12,15 @@ import {
   reduxFirestore,
   getFirestore,
 } from "redux-firestore";
-import {
-  ReactReduxFirebaseProvider,
-  reactReduxFirebase,
-  getFirebase,
-} from "react-redux-firebase";
+import { ReactReduxFirebaseProvider, getFirebase } from "react-redux-firebase";
 import { firebaseConfig } from "./fbase";
 import firebase from "firebase/app";
 
+const initialState = {};
+
 const store = createStore(
   rootReducer,
+  initialState,
   compose(
     applyMiddleware(
       thunk.withExtraArgument({
@@ -33,9 +32,14 @@ const store = createStore(
   )
 );
 
+// react-redux-firebase config
+const rrfConfig = {
+  userProfile: "users",
+  useFirestoreForProfile: true, // Firestore for Profile instead of Realtime DB
+};
 const rrfProps = {
   firebase,
-  config: firebaseConfig,
+  config: rrfConfig,
   dispatch: store.dispatch,
   createFirestoreInstance,
 };
