@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Home from "./Home";
 import Navbar from "./layout/Navbar";
@@ -8,13 +8,12 @@ import SignUp from "./auth/SignUp";
 import SignIn from "./auth/SignIn";
 
 function AppRouter() {
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
   return (
     <Router>
-      <Navbar isLoggedIn={isLoggedIn} />
+      <Navbar />
       <Switch>
         <Route exact path="/">
-          <Home isLoggedIn={isLoggedIn} />
+          <Home />
         </Route>
         <Route exact path="/post">
           <CreatePost />

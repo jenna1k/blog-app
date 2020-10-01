@@ -1,8 +1,14 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { signOut } from "../../store/actions/authActions";
 
 export class Navbar extends Component {
+  handleClick = () => {
+    this.props.signOut();
+  };
   render() {
+    const { auth } = this.props;
     return (
       <nav className="flex items-center justify-between flex-wrap bg-green-700 p-2">
         <Link to="/">
@@ -21,7 +27,7 @@ export class Navbar extends Component {
             </span>
           </div>
         </Link>
-        {this.props.isLoggedIn ? (
+        {auth.uid ? (
           <div>
             <Link to="/post">
               <button className="outline-btn mr-2">Post</button>
@@ -31,6 +37,9 @@ export class Navbar extends Component {
               src="https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
               alt=""
             />
+            <button className="outline-btn mr-2" onClick={this.handleClick}>
+              Sign Out
+            </button>
           </div>
         ) : (
           <div className="outline-btn mt-4 lg:mt-0">
@@ -42,4 +51,16 @@ export class Navbar extends Component {
   }
 }
 
-export default Navbar;
+const mapStateToProps = (state) => {
+  return {
+    auth: state.firebase.auth,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    signOut: () => dispatch(signOut()),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Navbar);
