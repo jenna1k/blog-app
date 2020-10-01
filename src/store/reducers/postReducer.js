@@ -10,6 +10,10 @@ const postReducer = (state = initState, action) => {
       console.log("delete post");
     case "DELETE_POST_ERROR":
       console.log("failed to delete a post");
+    case "EDIT_POST":
+      console.log("edit post");
+    case "EDIT_POST_ERROR":
+      console.log("failed to edit a post");
     default:
       return state;
   }

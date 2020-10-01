@@ -1,8 +1,7 @@
-// import { firestore } from "firebase";
 import { v4 as uuidv4 } from "uuid";
 
 export const createPost = (post) => {
-  return (dispatch, getState, { getFirestore, getFirebase }) => {
+  return (dispatch, getState, { getFirestore }) => {
     const firestore = getFirestore();
     const profile = getState().firebase.profile;
     const authorId = getState().firebase.auth.uid;
@@ -21,6 +20,19 @@ export const createPost = (post) => {
       })
       .catch((err) => {
         dispatch({ type: "CREATE_POST_ERROR", err });
+      });
+  };
+};
+
+export const editPost = (id, post) => {
+  return (dispatch, getState, { getFirestore }) => {
+    const firestore = getFirestore();
+    firestore
+      .collection("posts")
+      .doc(id)
+      .update(post)
+      .then(() => {
+        dispatch({ type: "EDIT_POST" });
       });
   };
 };

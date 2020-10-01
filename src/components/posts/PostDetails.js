@@ -1,5 +1,5 @@
 import React from "react";
-import { withRouter } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { firestoreConnect } from "react-redux-firebase";
 import { compose } from "redux";
@@ -27,7 +27,9 @@ const PostDetails = ({ post, auth, deletePost, id, history }) => {
             </p>
             {post.authorId === auth.uid ? (
               <div className="flex items-center">
-                <button className="btn bg-gray-200">Edit</button>
+                <Link to={`/editPost/${id}`}>
+                  <button className="btn bg-gray-200">Edit</button>
+                </Link>
                 <button className="btn bg-red-400" onClick={handleDeleteClick}>
                   Delete
                 </button>

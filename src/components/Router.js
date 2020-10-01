@@ -4,6 +4,7 @@ import Home from "./Home";
 import Navbar from "./layout/Navbar";
 import PostDetails from "./posts/PostDetails";
 import CreatePost from "./posts/CreatePost";
+import EditPost from "./posts/EditPost";
 import SignUp from "./auth/SignUp";
 import SignIn from "./auth/SignIn";
 
@@ -20,6 +21,9 @@ function AppRouter() {
         </Route>
         <Route path="/post/:id">
           <PostDetails />
+        </Route>
+        <Route path="/editPost/:id">
+          <EditPost />
         </Route>
         <Route path="/signup">
           <SignUp />
