@@ -83,15 +83,17 @@ const PostDetails = ({ post, auth, deletePost, id, history }) => {
             <div key={comment.id}>{comment.comment}</div>
           ))}
         </div>
-        <form onSubmit={handleCommentSubmit}>
-          <input
-            type="text"
-            placeholder="comment"
-            value={comment}
-            onChange={handleCommentChange}
-          />
-          <input type="submit" value="submit" />
-        </form>
+        {auth.uid ? (
+          <form onSubmit={handleCommentSubmit}>
+            <input
+              type="text"
+              placeholder="comment"
+              value={comment}
+              onChange={handleCommentChange}
+            />
+            <input type="submit" value="submit" />
+          </form>
+        ) : null}
       </section>
     );
   } else {
