@@ -1,16 +1,56 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { firestoreConnect } from "react-redux-firebase";
 import { compose } from "redux";
 import { deletePost } from "../../store/actions/postActions";
+import { dbService } from "../../fbase";
 
 const PostDetails = ({ post, auth, deletePost, id, history }) => {
+  const [comment, setComment] = useState("");
+  const [comments, setComments] = useState([]);
+
   const handleDeleteClick = (event) => {
     event.preventDefault();
     deletePost(id);
     history.push("/");
   };
+
+  const handleCommentChange = (event) => {
+    const {
+      target: { value },
+    } = event;
+    setComment(value);
+  };
+
+  const handleCommentSubmit = async (event) => {
+    event.preventDefault();
+    const commentObj = {
+      postId: id,
+      comment,
+      creatorId: auth.uid,
+      createdAt: Date.now(),
+    };
+    await dbService.collection("comments").add(commentObj);
+    setComment("");
+  };
+
+  const getFilteredComments = async () => {
+    await dbService
+      .collection("comments")
+      .where("postId", "==", id)
+      .orderBy("createdAt", "asc")
+      .onSnapshot((snapshot) => {
+        const commentArray = snapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        setComments(commentArray);
+      });
+  };
+  useEffect(() => {
+    getFilteredComments();
+  }, []);
 
   if (post) {
     return (
@@ -38,6 +78,20 @@ const PostDetails = ({ post, auth, deletePost, id, history }) => {
             <p className="pb-3">{post.content}</p>
           </div>
         </article>
+        <div>
+          {comments.map((comment) => (
+            <div key={comment.id}>{comment.comment}</div>
+          ))}
+        </div>
+        <form onSubmit={handleCommentSubmit}>
+          <input
+            type="text"
+            placeholder="comment"
+            value={comment}
+            onChange={handleCommentChange}
+          />
+          <input type="submit" value="submit" />
+        </form>
       </section>
     );
   } else {
