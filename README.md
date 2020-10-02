@@ -1,4 +1,4 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Check the [blog-app](https://nostalgic-villani-bf2596.netlify.app/).
 
 ## Used tech stack
 
