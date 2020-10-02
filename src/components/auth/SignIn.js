@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { Link, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { signIn } from "../../store/actions/authActions";
-import { authService, fbInstance } from "../../fbase";
 
 export class SignIn extends Component {
   state = {

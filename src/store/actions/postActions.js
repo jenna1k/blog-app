@@ -1,5 +1,3 @@
-import { v4 as uuidv4 } from "uuid";
-
 export const createPost = (post) => {
   return (dispatch, getState, { getFirestore }) => {
     const firestore = getFirestore();
